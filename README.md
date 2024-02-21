@@ -8,8 +8,6 @@ EcoGuard is a Flutter mobile application designed to empower individuals in maki
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
