@@ -25,14 +25,13 @@ class CustomTheme {
       appBarTheme: AppBarTheme(
           elevation: 0.0,
           centerTitle: true,
-          color: Palette.black700,
           titleTextStyle: TextStyle(
             fontSize: textScale.scale(25),
             fontFamily: 'Product',
-            color: Palette.primaryColorShade500,
+            color: Palette.white,
           ),
           actionsIconTheme: const IconThemeData(size: 33),
-          foregroundColor: Palette.primaryColor),
+          foregroundColor: Palette.white),
       textTheme: theme.primaryTextTheme
           .copyWith(
             labelLarge: theme.primaryTextTheme.labelLarge?.copyWith(
@@ -41,7 +40,7 @@ class CustomTheme {
               fontWeight: FontWeight.bold,
             ),
           )
-          .apply(displayColor: Palette.black, fontFamily: 'Cairo'),
+          .apply(displayColor: Palette.black, fontFamily: 'Product'),
       popupMenuTheme: const PopupMenuThemeData(iconColor: Palette.black700),
       iconTheme: const IconThemeData(color: Palette.white, size: 30),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -62,10 +61,10 @@ class CustomTheme {
           titleTextStyle: TextStyle(
               color: Palette.primaryColor,
               fontSize: 32,
-              fontFamily: 'Cairo',
+              fontFamily: 'Product',
               fontWeight: FontWeight.bold),
           contentTextStyle: TextStyle(
-              color: Palette.black700, fontFamily: 'Cairo', fontSize: 16)),
+              color: Palette.black700, fontFamily: 'Product', fontSize: 16)),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,

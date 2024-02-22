@@ -1,9 +1,14 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../core/models/event_model.dart';
+
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Event event;
+
+  const DetailsScreen({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +16,9 @@ class DetailsScreen extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/trees.jpg'),
+            image: AssetImage(event.image),
             fit: BoxFit.cover,
           ),
         ),
@@ -34,8 +39,7 @@ class DetailsScreen extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              ListView(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,8 +49,13 @@ class DetailsScreen extends StatelessWidget {
                           color: theme.scaffoldBackgroundColor.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: const Icon(
-                          Icons.arrow_back,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.arrow_back,
+                          ),
                         ).pSymmetric(v: 10, h: 15),
                       ),
                       Container(
@@ -55,21 +64,29 @@ class DetailsScreen extends StatelessWidget {
                           color: theme.scaffoldBackgroundColor.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.favorite_border,
+                            InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.favorite_border,
+                              ),
                             ),
-                            Icon(
-                              CupertinoIcons.square_arrow_up,
+                            InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                CupertinoIcons.square_arrow_up,
+                              ),
                             ),
                           ],
                         ).pSymmetric(v: 10, h: 10),
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  SizedBox(
+                    height: size.height * .3,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -77,17 +94,17 @@ class DetailsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Collaboration',
+                            event.tag,
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.6),
                                 fontSize: 18),
                           ),
-                          const Text(
-                            'Green Area',
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          Text(
+                            event.title,
+                            style: const TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           Text(
-                            'STARTING AT 9:10 AM',
+                            'STARTING AT ${event.startingTime}',
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.6),
                                 fontSize: 18),
@@ -107,17 +124,17 @@ class DetailsScreen extends StatelessWidget {
                                 begin: Alignment.centerRight,
                                 end: Alignment.centerLeft),
                             borderRadius: BorderRadius.circular(20)),
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'DEC',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 24),
                             ),
                             Text(
-                              '21',
-                              style: TextStyle(
+                              event.dateTime,
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold),
@@ -164,26 +181,55 @@ class DetailsScreen extends StatelessWidget {
                     'LOCATION',
                     style: TextStyle(fontSize: 23),
                   ).py16(),
-                  const Spacer(),
+                  Container(
+                    height: size.height * .2,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/maps.png'),
+                        fit: BoxFit.cover
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Positioned(
-                child: Container(
-                  height: size.height * 0.2,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: BlurryContainer(
+                  height: size.height * 0.15,
                   width: size.width,
-                  decoration: BoxDecoration(
-                    color: theme.scaffoldBackgroundColor.withOpacity(0.5),
-                  ),
-                  child: Container(
-                    width: size.width * .2,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                          Color(0xff84dc94),
-                          Color(0xff58ff4e),
-                        ],
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft)),
+                  blur: 8,
+                  padding: const EdgeInsets.all(40),
+                  color: theme.scaffoldBackgroundColor.withOpacity(0.4),
+                  // borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  child: SizedBox(
+                    height: size.height * .07,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xff84dc94),
+                                  Color(0xff58ff4e),
+                                ],
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Text(
+                          'Collabrate',
+                          style: TextStyle(
+                              fontSize: 20,
+                              wordSpacing: 100,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               )

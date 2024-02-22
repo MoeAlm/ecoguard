@@ -1,7 +1,9 @@
-import 'package:ecoguard/src/app/feature/home/details_screen.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../core/components/event_card.dart';
+import '../../core/models/event_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -42,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             ),
             trailing: [
               const Icon(
-                CupertinoIcons.folder,
+                Icons.tune,
                 color: Colors.grey,
               ).pOnly(right: 4)
             ],
@@ -57,91 +59,10 @@ class HomeScreen extends StatelessWidget {
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                itemCount: eventList.length,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return const DetailsScreen();
-                        }),
-                      );
-                    },
-                    child: Container(
-                      width: size.width * 0.7,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        image: const DecorationImage(
-                            image: AssetImage('assets/images/trees.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          gradient: LinearGradient(
-                              colors: [
-                                Colors.transparent,
-                                Colors.transparent,
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.4)
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              height: size.height * .09,
-                              width: size.width * .195,
-                              decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'DEC',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 24),
-                                  ),
-                                  Text(
-                                    '21',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Collaboration',
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.6),
-                                        fontSize: 18),
-                                  ),
-                                  const Text(
-                                    'Green Area',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 30),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ).pSymmetric(v: 16, h: 20),
-                      ),
-                    ).px8(),
-                  );
+                  return eventCard(size,
+                      model: eventList[index], context: context);
                 }),
           ),
           Text(
@@ -154,85 +75,15 @@ class HomeScreen extends StatelessWidget {
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                itemCount: forYouList.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    width: size.width * 0.7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/trees.jpg'),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.4)
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: size.height * .09,
-                            width: size.width * .195,
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'DEC',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 24),
-                                ),
-                                Text(
-                                  '21',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Collaboration',
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.6),
-                                      fontSize: 18),
-                                ),
-                                const Text(
-                                  'Green Area',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 30),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ).pSymmetric(v: 16, h: 20),
-                    ),
-                  ).px8();
+                  return eventCard(size,
+                      model: forYouList[index], context: context);
                 }),
           ),
         ],
       ).px16(),
     );
   }
+
 }
