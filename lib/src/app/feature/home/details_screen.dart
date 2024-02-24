@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +6,16 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../core/models/event_model.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final Event event;
 
   const DetailsScreen({super.key, required this.event});
 
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -18,7 +24,7 @@ class DetailsScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(event.image),
+            image: AssetImage(widget.event.image),
             fit: BoxFit.cover,
           ),
         ),
@@ -94,17 +100,18 @@ class DetailsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.tag,
+                            widget.event.tag,
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.6),
                                 fontSize: 18),
                           ),
                           Text(
-                            event.title,
-                            style: const TextStyle(color: Colors.white, fontSize: 30),
+                            widget.event.title,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 30),
                           ),
                           Text(
-                            'STARTING AT ${event.startingTime}',
+                            'STARTING AT ${widget.event.startingTime}',
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.6),
                                 fontSize: 18),
@@ -116,14 +123,15 @@ class DetailsScreen extends StatelessWidget {
                         height: size.height * .09,
                         width: size.width * .195,
                         decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                colors: [
-                                  Color(0xff84dc94),
-                                  Color(0xff58ff4e),
-                                ],
-                                begin: Alignment.centerRight,
-                                end: Alignment.centerLeft),
-                            borderRadius: BorderRadius.circular(20)),
+                          gradient: const LinearGradient(
+                              colors: [
+                                Color(0xff84dc94),
+                                Color(0xff58ff4e),
+                              ],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -133,7 +141,7 @@ class DetailsScreen extends StatelessWidget {
                                   TextStyle(color: Colors.white, fontSize: 24),
                             ),
                             Text(
-                              event.dateTime,
+                              widget.event.dateTime,
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -188,9 +196,8 @@ class DetailsScreen extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/maps.png'),
-                        fit: BoxFit.cover
-                      ),
+                          image: AssetImage('assets/images/maps.png'),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ],
@@ -209,8 +216,43 @@ class DetailsScreen extends StatelessWidget {
                   child: SizedBox(
                     height: size.height * .07,
                     child: InkWell(
-                      onTap: () {},
-                      child: Container(
+                      onTap: () {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          headerAnimationLoop: true,
+                          title: 'Success',
+                          desc:
+                              'Successfully completed, we are waiting for you',
+                          btnOkOnPress: () {},
+                          btnOkIcon: Icons.check_circle,
+                          btnOkColor: Colors.green,
+                        ).show();
+                        setState(() {
+                          widget.event.isJoined = true;
+                        });
+                      },
+                      child: widget.event.isJoined ? Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                            // gradient: const LinearGradient(
+                            //     colors: [
+                            //       Color(0xff84dc94),
+                            //       Color(0xff58ff4e),
+                            //     ],
+                            //     begin: Alignment.centerRight,
+                            //     end: Alignment.centerLeft),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Text(
+                          'Joined',
+                          style: TextStyle(
+                              fontSize: 20,
+                              wordSpacing: 100,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ):Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             gradient: const LinearGradient(

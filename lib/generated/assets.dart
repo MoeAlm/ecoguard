@@ -5,9 +5,14 @@ class Assets {
   static const String fontsProduct = 'assets/fonts/Product.ttf';
   static const String imagesFire = 'assets/images/fire.jpg';
   static const String imagesFlooding = 'assets/images/flooding.jpeg';
+  static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesMan = 'assets/images/man.png';
   static const String imagesMaps = 'assets/images/maps.png';
   static const String imagesProfile = 'assets/images/profile.jpg';
+  static const String imagesRegister = 'assets/images/register.jpg';
+  static const String imagesSingin = 'assets/images/singin.png';
   static const String imagesTrees = 'assets/images/trees.jpg';
   static const String imagesWater = 'assets/images/water.jpg';
+  static const String imagesWoman = 'assets/images/woman.png';
 
 }

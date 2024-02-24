@@ -1,4 +1,4 @@
-import 'package:ecoguard/src/app/feature/screens.dart';
+import 'package:ecoguard/src/app/feature/splash_screen.dart';
 import 'package:ecoguard/src/app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +15,7 @@ class EcoguardApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Ecoguard App',
       theme: CustomTheme.lightTheme(context),
-      home:  const Screens(
-      ),
+      home:  const SplashScreen() //Screens(),
     );
   }
 }

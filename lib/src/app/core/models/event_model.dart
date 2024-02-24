@@ -6,15 +6,18 @@ class Event {
   final String image;
   final String about;
   final String location;
+   bool isJoined = false;
 
-  Event(
-      {required this.title,
-      required this.tag,
-      required this.dateTime,
-      required this.startingTime,
-      required this.image,
-      required this.about,
-      required this.location});
+  Event({
+    required this.title,
+    required this.tag,
+    required this.dateTime,
+    required this.startingTime,
+    required this.image,
+    required this.about,
+    required this.location,
+    required this.isJoined,
+  });
 }
 
 List<Event> eventList = [
@@ -27,7 +30,8 @@ List<Event> eventList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
   Event(
       title: 'Flooding',
       tag: 'Environmental Issue',
@@ -37,7 +41,8 @@ List<Event> eventList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
 ];
 List<Event> forYouList = [
   Event(
@@ -49,7 +54,8 @@ List<Event> forYouList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
   Event(
       title: 'Earth Quick',
       tag: 'Environmental Issue',
@@ -59,7 +65,8 @@ List<Event> forYouList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
 ];
 List<Event> reportList = [
   Event(
@@ -71,7 +78,8 @@ List<Event> reportList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
   Event(
       title: 'Derna Flooding',
       tag: 'Emergency',
@@ -81,5 +89,6 @@ List<Event> reportList = [
       about: 'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. '
           'Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, '
           'fermentum, mauris leo eget.',
-      location: ''),
+      location: '',
+      isJoined: false),
 ];
